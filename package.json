@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "server",
   "version": "1.0.0",
   "description": "",
@@ -6,10 +7,23 @@
   "scripts": {
     "start": "node server.js",
     "watch": "nodemon server.js"
+=======
+  "name": "googlebooks-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd client && npm run build",
+    "render-build": "npm install && npm run build"
+>>>>>>> f21af465 (NEW CHANGES)
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+<<<<<<< HEAD
   "dependencies": {
     "apollo-server-express": "^3.13.0",
     "bcrypt": "^4.0.1",
@@ -21,5 +35,14 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
+=======
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.10.4",
+    "@apollo/server": "^4.10.4",
+    "graphql": "^16.8.1"
+>>>>>>> f21af465 (NEW CHANGES)
   }
 }
