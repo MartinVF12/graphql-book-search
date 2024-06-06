@@ -1,8 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const db = require('./config/connection');
-// Cambiar a rutas absolutas para importar los esquemas
 const typeDefs = require(path.resolve(__dirname, './schemas/typeDefs'));
 const resolvers = require(path.resolve(__dirname, './schemas/resolvers'));
 const { authMiddleware } = require('./utils/auth');
@@ -36,5 +36,3 @@ server.start().then(() => {
     });
   });
 });
-
-// prueba // 
