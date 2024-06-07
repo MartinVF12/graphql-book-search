@@ -6,14 +6,14 @@
   "scripts": {
     "start": "node server/server.js",
     "watch": "nodemon server/server.js",
-    "develop": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd server && nodemon server.js",
-    "client": "cd client && npm start",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install-server": "cd server && npm i",
     "install-client": "cd client && npm i",
+    "install": "npm run install-server && npm run install-client",
+    "build-server": "cd server && npm run build",
     "build-client": "cd client && npm run build",
-    "render-build": "npm run install-server && npm run install-client && npm run build-client",
-    "postinstall": "npm run build-client"
+    "build": "npm run build-server && npm run build-client",
+    "render-build": "npm install && npm run build"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.3",
-    "concurrently": "^5.1.0"
+    "concurrently": "^5.1.0",
+    "vite": "^2.9.9"
   }
 }
