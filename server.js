@@ -23,19 +23,15 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => authMiddleware({ req }),
-  cache: 'bounded', // Ajuste de cache para evitar ataques de DOS
-  persistedQueries: false // desactiva las consultas persistentes si no las necesitas
+  persistedQueries: {
+    cache: 'bounded' // Configuración para caché limitada
+  }
 });
 
 server.start().then(() => {
   server.applyMiddleware({ app });
 
   app.use(routes);
-
-  // Ruta para servir index.html desde dist
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-  });
 
   db.once('open', () => {
     app.listen(PORT, () => {
