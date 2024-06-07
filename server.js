@@ -16,19 +16,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
+  app.use(express.static(path.join(__dirname, '../client/dist')));
 }
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => authMiddleware({ req }),
+  cache: 'bounded', // Ajuste de cache para evitar ataques de DOS
+  persistedQueries: false // desactiva las consultas persistentes si no las necesitas
 });
 
 server.start().then(() => {
   server.applyMiddleware({ app });
 
   app.use(routes);
+
+  // Ruta para servir index.html desde dist
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+  });
 
   db.once('open', () => {
     app.listen(PORT, () => {
@@ -37,6 +44,3 @@ server.start().then(() => {
     });
   });
 });
-
-
-//prueba 
